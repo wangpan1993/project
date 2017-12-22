@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/frag"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <RadioGroup
+        android:id="@+id/rg_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@color/selector_tab_text_color" />
+
+        <RadioButton
+            android:id="@+id/tab_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="tab2"
+            android:textColor="@color/selector_tab_text_color" />
+
+        <RadioButton
+            android:id="@+id/tab_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="tab3"
+            android:textColor="@color/selector_tab_text_color" />
+
+        <RadioButton
+            android:id="@+id/tab_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="@color/selector_tab_text_color" />
+
+    </RadioGroup>
+
+</LinearLayout>

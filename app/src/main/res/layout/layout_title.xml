@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x44"
+    android:background="@drawable/background_color"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/rl_titleLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/x5">
+
+        <TextView
+            android:id="@+id/tv_titleLeft"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/x10"
+            android:text="操作"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x15"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_titleLeft"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x10"
+            android:src="@mipmap/back_white" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_titleName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="标题"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_titleRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/x5">
+
+        <TextView
+            android:id="@+id/tv_titleRight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="操作"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x15"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_titleRight"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x10"
+            android:src="@mipmap/back_white" />
+    </RelativeLayout>
+</RelativeLayout>
