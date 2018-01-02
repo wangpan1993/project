@@ -48,6 +48,7 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
         };
 
         listView.setAdapter(adapter);
+        String url = "http://58.63.233.48/app.znds.com/down/20170712/ystjg_2.6.0.1059_dangbei.apk";
     }
 
     @Override

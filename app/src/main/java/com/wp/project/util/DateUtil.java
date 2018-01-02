@@ -20,8 +20,8 @@ public class DateUtil {
      *
      * @return
      */
-    public static String getCurrentDate() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+    public static String getCurrentDate(String formatStyle) {
+        SimpleDateFormat df = new SimpleDateFormat(formatStyle);
         return df.format(new Date());
     }
 
@@ -30,8 +30,8 @@ public class DateUtil {
      *
      * @return
      */
-    public static String getTomorrowDate() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+    public static String getTomorrowDate(String formatStyle) {
+        SimpleDateFormat df = new SimpleDateFormat(formatStyle);
         return String.valueOf(Integer.valueOf(df.format(new Date())) + 1);
     }
 
@@ -40,8 +40,8 @@ public class DateUtil {
      *
      * @return
      */
-    public static String getCurrentDateString() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+    public static String getCurrentDateString(String formatStyle) {
+        SimpleDateFormat df = new SimpleDateFormat(formatStyle);
         return df.format(new Date());
     }
 
@@ -185,4 +185,42 @@ public class DateUtil {
             }
         }
     }
+
+
+    /**
+     * 获取两个日期之间的间隔天数
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public static int getGapCount(String startDate, String endDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date_start = null;
+        Date date_end = null;
+        try {
+            date_start = sdf.parse(startDate);
+            date_end = sdf.parse(endDate);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar fromCalendar = Calendar.getInstance();
+        fromCalendar.setTime(date_start);
+        fromCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        fromCalendar.set(Calendar.MINUTE, 0);
+        fromCalendar.set(Calendar.SECOND, 0);
+        fromCalendar.set(Calendar.MILLISECOND, 0);
+
+        Calendar toCalendar = Calendar.getInstance();
+        toCalendar.setTime(date_end);
+        toCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        toCalendar.set(Calendar.MINUTE, 0);
+        toCalendar.set(Calendar.SECOND, 0);
+        toCalendar.set(Calendar.MILLISECOND, 0);
+
+        return (int) ((toCalendar.getTime().getTime() - fromCalendar.getTime().getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+
 }
