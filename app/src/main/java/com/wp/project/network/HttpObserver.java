@@ -69,6 +69,7 @@ public abstract class HttpObserver<T> implements Observer<T> {
         loadingDialog = null;
         ((BaseActivity) mContext).showErrorView();
         if (e instanceof ApiException) {
+            ((ApiException) e).errorDeal(mContext);
             Toast.makeText(MyApplication.getInstance(), e.getMessage(), Toast.LENGTH_SHORT).show();
         } else if ((e instanceof UnknownHostException)) {
             Toast.makeText(MyApplication.getInstance(), "网络异常", Toast.LENGTH_SHORT).show();

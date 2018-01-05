@@ -1,5 +1,7 @@
 package com.wp.project.network;
 
+import android.content.Context;
+
 import com.wp.project.base.BaseResponse;
 
 /**
@@ -13,10 +15,9 @@ public class ApiException extends RuntimeException {
     public ApiException(BaseResponse<String> errorResponse) {
         super(errorResponse.getReason());
         this.errorResponse = errorResponse;
-        errorDeal(errorResponse);
     }
 
-    private void errorDeal(BaseResponse<String> errorResponse) {
+    public void errorDeal(Context mContext) {
         switch (errorResponse.getError_code()) {
             case 0:
                 break;

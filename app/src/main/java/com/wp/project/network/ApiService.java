@@ -11,6 +11,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -28,14 +29,30 @@ public interface ApiService {
 //                                          @Field("user_password") String phone_num);
 
     @GET(Contants.URL_TEST)
-    Observable<BaseResponse<JokeBean>> jokeShow(@Query("page") int page,
-                                                @Query("pagesize") int pagesize,
-                                                @Query("key") String key);
+    Observable<BaseResponse<JokeBean>> jokeShow(@Query("page") int page, @Query("pagesize") int pagesize, @Query("key") String key);
 
     @GET(Contants.URL_TEST)
     Observable<BaseResponse<JokeBean>> jokeShow(@QueryMap() Map<String, Object> map);
 
     @FormUrlEncoded
     @POST(Contants.URL_TEST)
-    Observable<BaseResponse<JokeBean>> postDatas(@FieldMap Map<String, Object> map);
+    Observable<BaseResponse<JokeBean>> postStringDatas(@FieldMap Map<String, Object> map);
+
+    //统一数据get调用：回调类型：String
+    @GET("{url}")
+    Observable<BaseResponse<String>> getStringDatas(@Path("url") String url, @QueryMap() Map<String, Object> map);
+
+    //统一数据post调用：回调类型：String
+    @FormUrlEncoded
+    @POST("{url}")
+    Observable<BaseResponse<String>> postDatas(@Path("url") String url, @FieldMap() Map<String, Object> map);
+
+    @GET("{url}")
+    Observable<BaseResponse<Object>> getObjectDatas(@Path("url") String url, @QueryMap() Map<String, Object> map);
+
+    @FormUrlEncoded
+    @POST("{url}")
+    Observable<BaseResponse<Object>> postObjectDatas(@Path("url") String url, @FieldMap() Map<String, Object> map);
+
+
 }

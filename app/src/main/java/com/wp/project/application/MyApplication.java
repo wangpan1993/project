@@ -34,8 +34,8 @@ public class MyApplication extends Application {
 
     private void init() {
         //初始化日志收集器
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(getApplicationContext(), this);
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        crashHandler.init(getApplicationContext(), this);
     }
 
     /**
