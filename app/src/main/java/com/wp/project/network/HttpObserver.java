@@ -31,13 +31,13 @@ public abstract class HttpObserver<T> implements Observer<T> {
 
     protected HttpObserver(Context context, boolean showProgress) {//想显示就显示，不想显示就不显示
         this.showProgress = showProgress;
-        loadingDialog = LoadingDialog.getInstance(context);
+        loadingDialog = LoadingDialog.getInstance();
     }
 
     protected HttpObserver(Context context) {//想显示就显示，不想显示就不显示
         showProgress = true;
         mContext = context;
-        loadingDialog = LoadingDialog.getInstance(context);
+        loadingDialog = LoadingDialog.getInstance();
 
     }
 

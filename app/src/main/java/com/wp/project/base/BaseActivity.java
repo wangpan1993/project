@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -50,6 +51,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (findViewById(R.id.ll_errer).getVisibility() != View.VISIBLE) {
             findViewById(R.id.fl_content).setVisibility(View.VISIBLE);
         }
+        Log.d("base","onCreate");
     }
 
     private void init() {
@@ -109,33 +111,39 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("base","onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("base","onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d("base","onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d("base","onStop");
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+
 //        Presenter解除绑定
         if (mPresenter != null) {
             mPresenter.detachView();
             mPresenter = null;
         }
+        Log.d("base","onDestroy");
         //删除当前Activity
         AppManager.getAppManager().finishActivity(this);
+        super.onDestroy();
     }
 
 

@@ -1,7 +1,6 @@
 package com.wp.project.application;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 
 import java.util.Stack;
@@ -13,15 +12,19 @@ import java.util.Stack;
 public class AppManager {
 
     private static Stack<Activity> activityStack;
-    private static AppManager instance;
+    private static volatile AppManager instance;
 
     private AppManager(){}
     /**
      * 单一实例
      */
     public static AppManager getAppManager(){
-        if(instance==null){
-            instance=new AppManager();
+        if(instance == null){
+            synchronized (AppManager.class) {
+                if (instance == null) {
+                    instance = new AppManager();
+                }
+            }
         }
         return instance;
     }
@@ -62,13 +65,7 @@ public class AppManager {
      * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls){
-//        for (Activity activity : activityStack) {
-//            if(activity.getClass().equals(cls) ){
-//                finishActivity(activity);
-//            }
-//        }
-        for (int i=activityStack.size()-1;i>=0;i--) {
-            Activity activity=activityStack.get(i);
+        for (Activity activity : activityStack) {
             if(activity.getClass().equals(cls) ){
                 finishActivity(activity);
             }
@@ -80,7 +77,10 @@ public class AppManager {
     public void finishAllActivity(){
         for (int i = 0, size = activityStack.size(); i < size; i++){
             if (null != activityStack.get(i)){
-                activityStack.get(i).finish();
+                Activity activity = activityStack.get(i);
+                if (!activity.isFinishing()) {
+                    activity.finish();
+                }
             }
         }
         activityStack.clear();
@@ -91,9 +91,19 @@ public class AppManager {
     public void AppExit(Context context) {
         try {
             finishAllActivity();
-            ActivityManager activityMgr= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            activityMgr.restartPackage(context.getPackageName());
+            /*Intent intent = new Intent(context, MainActivity.class);
+            PendingIntent restartIntent = PendingIntent.getActivity(
+                    context, 0, intent,
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
+            //退出程序
+            AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000,
+                    restartIntent); // 1秒钟后重启应用
+*/
+            // 杀死该应用进程
+            android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(0);
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
     }
 }

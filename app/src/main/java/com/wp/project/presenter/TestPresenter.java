@@ -31,6 +31,7 @@ public class TestPresenter extends BasePresenter<TestIView> {
 
                     @Override
                     protected void onSuccess(JokeBean jokeBean) {
+                        if(mView!=null)
                         mView.onShowJoke(jokeBean);
                     }
 
