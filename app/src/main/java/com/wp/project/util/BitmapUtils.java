@@ -33,7 +33,7 @@ public class BitmapUtils {
 	public static void saveBitmap(String imagePath, String bitName,
                                   String savePath, int size) {
 		Bitmap bitmap;
-		Double fileSize = FileUtils.getFileSize(new File(imagePath));
+		long fileSize = FileUtils.getSize(imagePath);
 		if (fileSize < 0.4) {
 			bitmap = BitmapFactory.decodeFile(imagePath);
 		} else {

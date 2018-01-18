@@ -3,6 +3,8 @@ package com.wp.project.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import java.security.MessageDigest;
 
@@ -78,5 +80,23 @@ public class AppUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static boolean isNetworkAvailable(Context mContext) {
+        boolean result = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            if (cm != null) {
+                NetworkInfo ni = cm.getActiveNetworkInfo();
+                if (ni != null) {
+                    result = ni.isAvailable();
+                }
+            }
+        } catch (Exception e) {
+        }
+
+        return result;
+
     }
 }

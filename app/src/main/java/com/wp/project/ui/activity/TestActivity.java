@@ -43,12 +43,12 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
             public void initAdapter(CommonRecyclerAdapter<JokeBean.DataBean>.CommonViewHolder holder, View view, int position) {
                 TextView textView = holder.getView(android.R.id.text1);
                 textView.setText(adapter.getItem(position).getContent());
+
             }
 
         };
 
         listView.setAdapter(adapter);
-        String url = "http://58.63.233.48/app.znds.com/down/20170712/ystjg_2.6.0.1059_dangbei.apk";
     }
 
     @Override
@@ -63,7 +63,6 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
 
     @Override
     public void onShowJoke(JokeBean jokeBean) {
-
         adapter.setDatas(jokeBean.getData(), true);
     }
 

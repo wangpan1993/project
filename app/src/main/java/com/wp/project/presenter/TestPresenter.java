@@ -1,8 +1,8 @@
 package com.wp.project.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.orhanobut.logger.Logger;
 import com.wp.project.application.Contants;
 import com.wp.project.base.BasePresenter;
 import com.wp.project.modle.beans.JokeBean;
@@ -31,14 +31,19 @@ public class TestPresenter extends BasePresenter<TestIView> {
 
                     @Override
                     protected void onSuccess(JokeBean jokeBean) {
-                        if(mView!=null)
-                        mView.onShowJoke(jokeBean);
+                        if (mView != null){
+                            mView.onShowJoke(jokeBean);
+                            Logger.d(jokeBean.getData().get(0).getContent());
+                        }
                     }
 
                     @Override
                     protected void onFail(Throwable e) {
-                        Log.d("TestPresenter", e.getMessage());
+                        Logger.e(e.getMessage());
                     }
                 });
+    }
+
+    public void getJonke() {
     }
 }

@@ -3,8 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="热修复完成"
+        android:textSize="@dimen/x25"
+        android:textColor="@android:color/holo_red_dark"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"/>
 </LinearLayout>

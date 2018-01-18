@@ -17,4 +17,8 @@ public class Contants {
     //第三方key等
     public static final String JUHE_KEY = "3bcdd67e654cd2e959fb133e76d27fa0";
 
+    public static final String SOPHIX_ID = "yours";
+    public static final String SOPHIX_Secret = "yours";
+    public static final String SOPHIX_RSA ="yours";
+
 }
