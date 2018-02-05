@@ -5,15 +5,12 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.util.AttributeSet;
 import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
-import com.wp.project.R;
 import com.wp.project.util.LoadingDialog;
 
 /**
@@ -43,24 +40,9 @@ public class MyWebView extends WebView {
         initWebSetting();
         loadingDialog = LoadingDialog.getInstance(mContext);
         initWebClient();
-        initWebChromeCliet();
     }
 
-    private void initWebChromeCliet() {
-        setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                //网页加载进度
-            }
 
-            @Override
-            public void onReceivedTitle(WebView view, String title) {
-                super.onReceivedTitle(view, title);
-                ((TextView) findViewById(R.id.tv_titleName)).setText(title);//设置标题
-            }
-        });
-    }
 
     private void initWebClient() {
         setWebViewClient(new WebViewClient() {
