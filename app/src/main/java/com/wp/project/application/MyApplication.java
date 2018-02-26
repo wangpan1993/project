@@ -16,10 +16,6 @@ import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.DBCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.model.HttpParams;
-import com.orhanobut.logger.Logger;
-import com.taobao.sophix.PatchStatus;
-import com.taobao.sophix.SophixManager;
-import com.taobao.sophix.listener.PatchLoadStatusListener;
 
 import java.io.IOException;
 
@@ -58,28 +54,22 @@ public class MyApplication extends Application {
 
     private void init() {
 
-        initCrashHandler();
-//        initSophix();
         initOkGo();
-        initLogger();
-    }
-
-    private void initLogger() {
-        Logger.init("PROJECT");               // default tag : PRETTYLOGGER or use just init()
     }
 
     private void initOkGo() {
         getOkhttpClient();
         HttpParams params = new HttpParams();
-        params.put("", "");
+        params.put("bizid", "bizid");
+        params.put("marking", "marking");
         OkGo.getInstance().init(this)                       //必须调用初始化
                 .setOkHttpClient(getOkhttpClient())               //建议设置OkHttpClient，不设置将使用默认的
                 .setCacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)
                 //全局统一缓存模式，默认不使用缓存，可以不传
-                .setCacheTime(1 * 60 * 60 * 1000)   //全局统一缓存时间，默认永不过期，可以不传
+//                .setCacheTime(1 * 60 * 60 * 1000)   //全局统一缓存时间，默认永不过期，可以不传
                 .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次
                 // (一次原始请求，三次重连请求)，不需要可以设置为0
-//                .addCommonHeaders(headers)                      //全局公共头
+//                .addCommonHeaders()                      //全局公共头
                 .addCommonParams(params);                       //全局公共参数
     }
 
@@ -107,8 +97,7 @@ public class MyApplication extends Application {
     private Interceptor getInterceptor() {
         return new Interceptor() {
             @Override
-            public Response intercept(Chain chain) throws IOException
-            {//这个chain里面包含了request和response，所以你要什么都可以从这里拿
+            public Response intercept(Chain chain) throws IOException {//这个chain里面包含了request和response，所以你要什么都可以从这里拿
                 Request request = chain.request();
                 long t1 = System.nanoTime();//请求发起的时间
 
@@ -121,12 +110,12 @@ public class MyApplication extends Application {
                             sb.append(body.encodedName(i) + "=" + body.encodedValue(i) + ",");
                         }
                         sb.delete(sb.length() - 1, sb.length());
-                        Log.d("retrofit", String.format("发送请求 %s on %s %n%s %nRequestParams:{%s}",
+                        Log.d("okgo", String.format("发送请求 %s on %s %n%s %nRequestParams:{%s}",
                                 request.url(), chain.connection(), request.headers(), sb.toString
                                         ()));
                     }
                 } else {
-                    Log.d("retrofit", String.format("发送请求 %s on %s%n%s",
+                    Log.d("okgo", String.format("发送请求 %s on %s%n%s",
                             request.url(), chain.connection(), request.headers()));
                 }
                 Response response = chain.proceed(request);
@@ -135,7 +124,7 @@ public class MyApplication extends Application {
                 //因为response.body().string()之后，response中的流会被关闭，程序会报错，我们需要创建出一
                 //个新的response给应用层处理
                 ResponseBody responseBody = response.peekBody(1024 * 1024);
-                Log.d("retrofit",
+                Log.d("okgo",
                         String.format("接收响应: [%s] %n返回json:【%s】 %.1fms %n%s",
                                 response.request().url(),
                                 responseBody.string(),
@@ -145,56 +134,6 @@ public class MyApplication extends Application {
                 return response;
             }
         };
-    }
-
-    /**
-     * 阿里热修复
-     */
-    private void initSophix() {
-
-// initialize最好放在attachBaseContext最前面，初始化直接在Application类里面，切勿封装到其他类
-        String appVersion = null;
-        try {
-            appVersion = getPackageManager().getPackageInfo(this.getPackageName(), 0)
-                    .versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            appVersion = "1.0.0";
-        }
-        SophixManager.getInstance().setContext(this)
-                .setAppVersion(appVersion)
-                .setAesKey(null)//补丁加密
-                .setEnableDebug(true)//是否调试模式
-                .setSecretMetaData(Contants.SOPHIX_ID, Contants.SOPHIX_Secret, Contants.SOPHIX_RSA)
-                .setPatchLoadStatusStub(new PatchLoadStatusListener() {
-                    @Override
-                    public void onLoad(final int mode, final int code, final String info, final
-                    int handlePatchVersion) {
-                        // 补丁加载回调通知
-                        if (code == PatchStatus.CODE_LOAD_SUCCESS) {
-
-                            // 表明补丁加载成功
-                        } else {
-                            if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
-                                // 表明新补丁生效需要重启. 开发者可提示用户或者强制重启;
-                                // 建议: 用户可以监听进入后台事件, 然后调用killProcessSafely自杀，以此加快应用补丁，详见1.3.2.3
-                            } else {
-                                // 其它错误信息, 查看PatchStatus类说明
-                            }
-                        }
-                    }
-                })
-                .initialize();
-
-        // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
-        SophixManager.getInstance().queryAndLoadNewPatch();
-    }
-
-    /**
-     * 初始化日志收集器
-     */
-    private void initCrashHandler() {
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(getApplicationContext(), this);
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.wp.project.ui.fragment;
 
+import android.os.Message;
+
 import com.wp.project.base.BaseFragment;
 import com.wp.project.presenter.TestPresenter;
 
@@ -30,7 +32,7 @@ public class TestFragment extends BaseFragment<TestPresenter> {
     }
 
     @Override
-    public void onFail(String message) {
+    public void onSuccess(Message message) {
 
     }
 }

@@ -2,6 +2,7 @@ package com.wp.project.ui.activity;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -13,7 +14,6 @@ import com.wp.project.R;
 import com.wp.project.base.BaseActivity;
 import com.wp.project.presenter.MainPresenter;
 import com.wp.project.ui.fragment.FirstFragment;
-import com.wp.project.ui.iview.MainView;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * 思路：
  */
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
+public class MainActivity extends BaseActivity<MainPresenter>{
 
     private ArrayList<Fragment> fragments;
     private FragmentManager supportFragmentManager;
@@ -99,11 +99,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
 
-    @Override
-    public void onFail(String message) {
-
-    }
-
     private RadioButton getTab(String tabText, int resId) {
         RadioButton radioButton = new RadioButton(mContext);
         ViewGroup.LayoutParams layoutParams = radioButton.getLayoutParams();
@@ -121,5 +116,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         }
         radioButton.setCompoundDrawables(null, drawableTop, null, null);
         return radioButton;
+    }
+
+    @Override
+    public void onSuccess(Message message) {
+
     }
 }

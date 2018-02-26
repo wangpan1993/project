@@ -1,19 +1,21 @@
 package com.wp.project.ui.activity;
 
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.wp.project.R;
+import com.wp.project.application.Contants;
 import com.wp.project.base.BaseActivity;
-import com.wp.project.modle.beans.JokeBean;
+import com.wp.project.modle.JokeBean;
 import com.wp.project.presenter.TestPresenter;
 import com.wp.project.ui.adapter.CommonRecyclerAdapter;
-import com.wp.project.ui.iview.TestIView;
 
 
-public class TestActivity extends BaseActivity<TestPresenter> implements TestIView {
+public class TestActivity extends BaseActivity<TestPresenter>{
 
     private RecyclerView listView;
     //    private CommonAdapter<JokeBean.DataBean> adapter;
@@ -53,7 +55,7 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
 
     @Override
     protected void initDatas() {
-        mPresenter.showJoke(1, 5);
+        mPresenter.getJonke(Contants.BASE_URL+Contants.URL_TEST,1, 5,Contants.TEST_1);
     }
 
     @Override
@@ -62,12 +64,14 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
     }
 
     @Override
-    public void onShowJoke(JokeBean jokeBean) {
-        adapter.setDatas(jokeBean.getData(), true);
-    }
-
-    @Override
-    public void onFail(String message) {
-
+    public void onSuccess(Message message) {
+        switch (message.what) {
+            case Contants.TEST_1:
+                JokeBean jokeBean = (JokeBean) message.obj;
+                Log.d("TestActivity", jokeBean.getData().get(0).getContent());
+                break;
+            case Contants.TEST_2:
+                break;
+        }
     }
 }

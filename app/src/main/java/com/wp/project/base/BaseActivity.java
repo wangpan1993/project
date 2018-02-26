@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -102,6 +103,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         findViewById(R.id.fl_content).setVisibility(View.GONE);
 
     }
+
     public void showSucceedView() {
         findViewById(R.id.ll_errer).setVisibility(View.GONE);
         findViewById(R.id.fl_content).setVisibility(View.VISIBLE);
@@ -178,6 +180,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean addPermission(ArrayList<String> permissionsList, String permission) {
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
             if (shouldShowRequestPermissionRationale(permission)) {
