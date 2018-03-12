@@ -138,15 +138,6 @@ public class MyApplication extends Application {
         };
     }
 
-
-    /**
-     * 初始化日志收集器
-     */
-    private void initCrashHandler() {
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(getApplicationContext(), this);
-    }
-
     /**
      * 初始化屏幕宽高
      */

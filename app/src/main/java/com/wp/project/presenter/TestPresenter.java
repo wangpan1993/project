@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.wp.project.application.Contants;
 import com.wp.project.base.BasePresenter;
-import com.wp.project.modle.beans.JokeBean;
+import com.wp.project.modle.JokeBean;
 import com.wp.project.network.Api;
 import com.wp.project.network.HttpObserver;
-import com.wp.project.ui.iview.TestIView;
+import com.wp.project.ui.interfaces.TestIView;
 
 import java.util.Map;
 

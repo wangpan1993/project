@@ -1,6 +1,7 @@
 package com.wp.project.ui.activity;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,14 +9,13 @@ import android.widget.TextView;
 
 import com.wp.project.R;
 import com.wp.project.base.BaseActivity;
-import com.wp.project.modle.beans.JokeBean;
+import com.wp.project.modle.JokeBean;
 import com.wp.project.presenter.TestPresenter;
 import com.wp.project.ui.adapter.CommonRecyclerAdapter;
-import com.wp.project.ui.iview.TestIView;
+import com.wp.project.ui.interfaces.TestIView;
 import com.wp.project.ui.view.dwrefresh.DWRefreshLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class TestActivity extends BaseActivity<TestPresenter> implements TestIView {
@@ -72,8 +72,9 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
         adapter.setDatas(jokeBean.getData(), true);
     }
 
+
     @Override
-    public void onFail(String message) {
+    public void onSuccess(Message message) {
 
     }
 }

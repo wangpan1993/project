@@ -1,58 +1,46 @@
 package com.wp.project.base;
 
 
-import java.io.Serializable;
-
 /**
  * Created by 王攀 on 2017/2/22.
  */
 
-public class BaseResponse<T> implements Serializable {
+public class BaseResponse<T> {
 
-    private int result;
-    private String msg;
-    private String sign;
-    private T jsonresult;
+    private int error_code;
+    private String reason;
+    private T result;
+
+    public int getError_code() {
+        return error_code;
+    }
+
+    public void setError_code(int error_code) {
+        this.error_code = error_code;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public T getResult() {
+        return result;
+    }
+
+    public void setResult(T result) {
+        this.result = result;
+    }
 
     @Override
     public String toString() {
         return "BaseResponse{" +
-                "result=" + result +
-                ", msg='" + msg + '\'' +
-                ", sign='" + sign + '\'' +
-                ", jsonresult=" + jsonresult +
+                "error_code=" + error_code +
+                ", reason='" + reason + '\'' +
+                ", result=" + result +
                 '}';
-    }
-
-    public int getResult() {
-        return result;
-    }
-
-    public void setResult(int result) {
-        this.result = result;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
-    }
-
-    public T getJsonresult() {
-        return jsonresult;
-    }
-
-    public void setJsonresult(T jsonresult) {
-        this.jsonresult = jsonresult;
     }
 }
