@@ -1,6 +1,7 @@
 package com.wp.project.ui.fragment;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.widget.TextView;
 
 import com.wp.project.R;
@@ -34,16 +35,16 @@ public class FirstFragment extends BaseFragment {
         return R.layout.fragment_o;
     }
 
-    @Override
-    public void onFail(String message) {
-
-    }
-
     public static FirstFragment putInstance(String message) {
         Bundle bundle = new Bundle();
         bundle.putString("message", message);
         FirstFragment fragment = new FirstFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void onSuccess(Message message) {
+
     }
 }

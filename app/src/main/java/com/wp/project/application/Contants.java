@@ -19,6 +19,11 @@ public class Contants {
 
     public static final String SOPHIX_ID = "yours";
     public static final String SOPHIX_Secret = "yours";
-    public static final String SOPHIX_RSA ="yours";
+    public static final String SOPHIX_RSA = "yours";
+
+
+    //接口回调标识标识
+    public static final int TEST_1 = 101;
+    public static final int TEST_2 = 102;
 
 }

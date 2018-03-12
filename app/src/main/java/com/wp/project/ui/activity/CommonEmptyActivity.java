@@ -1,6 +1,7 @@
 package com.wp.project.ui.activity;
 
 import android.content.Intent;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -72,11 +73,6 @@ public class CommonEmptyActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onFail(String message) {
-
-    }
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KEYCODE_BACK) && mCommonWeb.canGoBack()) {
             mCommonWeb.goBack();
@@ -121,4 +117,8 @@ public class CommonEmptyActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onSuccess(Message message) {
+
+    }
 }
