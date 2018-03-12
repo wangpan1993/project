@@ -20,6 +20,8 @@ import com.wp.project.application.AppManager;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by 王攀 on 2017/2/22.
  */
@@ -67,7 +69,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         layout_title = findById(R.id.base_title);
 
         frameLayout.addView(view);
-
+        ButterKnife.bind(this,view);
         mContext = this;
         createPresenter();//建立presenter
         mPresenter.attachView(this);
@@ -179,15 +181,19 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     private boolean addPermission(ArrayList<String> permissionsList, String permission) {
-        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
-            if (shouldShowRequestPermissionRationale(permission)) {
-                return true;
-            } else {
-                permissionsList.add(permission);
-                return false;
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) { // 如果应用没有获得对应权限,则添加到列表中,准备批量申请
+                if (shouldShowRequestPermissionRationale(permission)) {
+                    return true;
+                } else {
+                    permissionsList.add(permission);
+                    return false;
+                }
 
-        } else {
+            } else {
+                return true;
+            }
+        }else{
             return true;
         }
     }

@@ -1,6 +1,7 @@
 package com.wp.project.util;
 
-import com.orhanobut.logger.Logger;
+
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -62,7 +63,7 @@ public class FileUtils {
         if (file.isFile() && file.exists()) {
             boolean isDelete = file.delete();
             if (!isDelete) {
-                Logger.d("DelFile :delete log file fail");
+                Log.d("FileUtils","DelFile :delete log file fail");
             }
         }
     }
@@ -93,13 +94,13 @@ public class FileUtils {
             if (null != tempFile && tempFile.exists() && tempFile.isFile()) {
                 boolean isFileDelete = tempFile.delete();
                 if (!isFileDelete) {
-                    Logger.d("DelFile :tempFile.delete() fail");
+                    Log.d("FileUtils","DelFile :tempFile.delete() fail");
                 }
             }
             if (tempFile.isDirectory()) {
                 boolean isDeleteAllFile = deleteAllFile(fPath + "/" + tList[i]);
                 if (!isDeleteAllFile) {
-                    Logger.d("DelFile :delete all log file fail");
+                    Log.d("FileUtils","DelFile :delete all log file fail");
                 }
                 delete(fPath + "/" + tList[i]);
                 return true;

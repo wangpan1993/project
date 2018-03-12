@@ -1,5 +1,6 @@
 package com.wp.project.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,12 +12,19 @@ import com.wp.project.modle.beans.JokeBean;
 import com.wp.project.presenter.TestPresenter;
 import com.wp.project.ui.adapter.CommonRecyclerAdapter;
 import com.wp.project.ui.iview.TestIView;
+import com.wp.project.ui.view.dwrefresh.DWRefreshLayout;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class TestActivity extends BaseActivity<TestPresenter> implements TestIView {
 
-    private RecyclerView listView;
-    //    private CommonAdapter<JokeBean.DataBean> adapter;
+
+    @BindView(R.id.rv_test)
+    RecyclerView rvTest;
+    @BindView(R.id.re_test)
+    DWRefreshLayout reTest;
     private CommonRecyclerAdapter<JokeBean.DataBean> adapter;
 
     @Override
@@ -27,28 +35,26 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
     @Override
     protected void initView() {
         getPersimmions();
-        listView = findById(R.id.listView);
-        layout_title.setVisibility(View.GONE);
-        listView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-//      listview的
-//      adapter = new CommonAdapter<JokeBean.DataBean>(mContext, android.R.layout.simple_list_item_1) {
-//            @Override
-//            public void initAdapter(CommonViewHolder viewHolder, int position, JokeBean.DataBean bean) {
-//                TextView textView = viewHolder.getView(android.R.id.text1);
-//                textView.setText(adapter.getItem(position).getContent());
-//            }
-//        };
-        adapter = new CommonRecyclerAdapter<JokeBean.DataBean>(mContext, android.R.layout.simple_list_item_1) {
+        reTest.setOnRefreshListener(new DWRefreshLayout.OnRefreshListener() {
             @Override
-            public void initAdapter(CommonRecyclerAdapter<JokeBean.DataBean>.CommonViewHolder holder, View view, int position) {
-                TextView textView = holder.getView(android.R.id.text1);
-                textView.setText(adapter.getItem(position).getContent());
+            public void onRefresh() {
 
             }
 
-        };
+            @Override
+            public void onLoadMore() {
 
-        listView.setAdapter(adapter);
+            }
+        });
+        rvTest.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        adapter = new CommonRecyclerAdapter<JokeBean.DataBean>(mContext, R.layout.item_test) {
+            @Override
+            public void initAdapter(CommonViewHolder holder, View view, int position) {
+                TextView textView = holder.getView(R.id.tv_test);
+                textView.setText(getItem(position).getContent());
+            }
+        };
+        rvTest.setAdapter(adapter);
     }
 
     @Override
