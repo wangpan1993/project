@@ -24,8 +24,12 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
     @BindView(R.id.rv_test)
     RecyclerView rvTest;
     @BindView(R.id.re_test)
-    DWRefreshLayout reTest;
+    DWRefreshLayout dwRefreshLayout;
     private CommonRecyclerAdapter<JokeBean.DataBean> adapter;
+    private boolean isClear = true;
+
+    private int page = 1;
+    private int pagesize = 5;
 
     @Override
     protected int getLayout() {
@@ -35,15 +39,21 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
     @Override
     protected void initView() {
         getPersimmions();
-        reTest.setOnRefreshListener(new DWRefreshLayout.OnRefreshListener() {
+        dwRefreshLayout.setOnRefreshListener(new DWRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                page = 1;
+                isClear = true;
+                //TODO:下拉刷新
+                mPresenter.showJoke(page, pagesize);
             }
 
             @Override
             public void onLoadMore() {
-
+                page++;
+                isClear = false;
+                mPresenter.showJoke(page, pagesize);
+                //TODO:上拉加载
             }
         });
         rvTest.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
@@ -59,7 +69,7 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
 
     @Override
     protected void initDatas() {
-        mPresenter.showJoke(1, 5);
+        mPresenter.showJoke(1, 20);
     }
 
     @Override
@@ -69,7 +79,8 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
 
     @Override
     public void onShowJoke(JokeBean jokeBean) {
-        adapter.setDatas(jokeBean.getData(), true);
+        adapter.setDatas(jokeBean.getData(), isClear);
+        dwRefreshLayout.setRefresh(false);
     }
 
 
