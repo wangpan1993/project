@@ -22,7 +22,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
  * Created by WangPan on 2018/1/18.
  */
 
-public class CommonEmptyActivity extends BaseActivity {
+public class CommonWebActivity extends BaseActivity {
 
     private MyWebView mCommonWeb;
     private ProgressBar mPb_web;
@@ -69,9 +69,12 @@ public class CommonEmptyActivity extends BaseActivity {
         }
 
         String path = intent.getStringExtra("path");
-        mCommonWeb.loadUrl(path);
+        webViewLoadUrl(path);
     }
 
+    public void webViewLoadUrl(String path) {
+        mCommonWeb.loadUrl(path);
+    }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KEYCODE_BACK) && mCommonWeb.canGoBack()) {
@@ -107,8 +110,8 @@ public class CommonEmptyActivity extends BaseActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                if(showTitle){
-                    if(TextUtils.isEmpty(mTitle)){
+                if (showTitle) {
+                    if (TextUtils.isEmpty(mTitle)) {
                         tv_titleName.setText(title);
                     }
                 }

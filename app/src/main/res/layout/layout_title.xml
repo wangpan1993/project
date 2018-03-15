@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="44dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="25dp"
+    android:paddingBottom="5dp"
     android:background="@drawable/background_color"
     android:orientation="horizontal">
 
     <RelativeLayout
         android:id="@+id/rl_titleLeft"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
         android:paddingLeft="5dp">
 
         <TextView
             android:id="@+id/tv_titleLeft"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="操作"
             android:textColor="@color/white"
@@ -23,16 +26,15 @@
 
         <ImageView
             android:id="@+id/iv_titleLeft"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:src="@mipmap/back_white" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_titleName"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="标题"
@@ -42,14 +44,15 @@
     <RelativeLayout
         android:id="@+id/rl_titleRight"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="7dp"
         android:layout_marginRight="5dp">
 
         <TextView
             android:id="@+id/tv_titleRight"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="操作"
             android:textColor="@color/white"
             android:textSize="15sp"
@@ -57,9 +60,8 @@
 
         <ImageView
             android:id="@+id/iv_titleRight"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:src="@mipmap/back_white" />
     </RelativeLayout>
 </RelativeLayout>
