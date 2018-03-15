@@ -27,9 +27,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.CommonEmptyActivity">
+        <activity android:name=".ui.activity.CommonWebActivity">
 
         </activity>
+        <activity android:name=".ui.activity.MainActivity" />
 
 
     </application>
