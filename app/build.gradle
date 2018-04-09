@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.wp.project"
-        minSdkVersion 15
-        targetSdkVersion 26
+        applicationId "com.sunboxsoft.charge.institute"
+        minSdkVersion 16
+        targetSdkVersion 27
         versionCode 110
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -54,22 +54,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:27.1.0'
     testCompile 'junit:junit:4.12'
-    //rxjava2+retrofit2
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
     //recyclerView
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:recyclerview-v7:27.1.0'
     //图片加载：
-    compile files('src/libs/glide-full-4.4.0.jar')
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     //EventBus:
     compile 'org.greenrobot:eventbus:3.1.1'
     compile 'com.lzy.net:okgo:3.0.4'
     //butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //js交互控件
+    compile 'com.gzsll.jsbridge:library:1.1.0'
 }
