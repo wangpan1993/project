@@ -62,6 +62,6 @@
             android:id="@+id/iv_titleRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/back_white" />
+            android:src="@mipmap/right_white" />
     </RelativeLayout>
 </RelativeLayout>

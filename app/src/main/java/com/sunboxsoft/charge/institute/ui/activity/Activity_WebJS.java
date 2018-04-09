@@ -51,6 +51,7 @@ public class Activity_WebJS extends BaseActivity {
     protected void initView() {
 
         mPb_web.setVisibility(View.GONE);//网页加载进度显示与隐藏
+
         tv_titleName = (TextView) findViewById(R.id.tv_titleName);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams
@@ -59,7 +60,7 @@ public class Activity_WebJS extends BaseActivity {
         mWebView.setLayoutParams(params);
 
         mWebView.setWebChromeClient(initWebChromeCliet());
-//        mWebView.setWebViewClient(initWebViewCliet());
+//        mWebView.setWebViewClient(initWebViewCliet());不能要，加上就出不来页面了。原因待调查
 //
         initWebSetting();//webView配置
         registHandler();//注册JS交互
@@ -99,13 +100,11 @@ public class Activity_WebJS extends BaseActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 //页面开始加载，
-//                loadingDialog.showProgressDialog();
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-//                loadingDialog.dismissProgressDialog();
             }
         };
     }
