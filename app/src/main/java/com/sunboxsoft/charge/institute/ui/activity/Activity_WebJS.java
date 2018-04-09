@@ -3,6 +3,7 @@ package com.sunboxsoft.charge.institute.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,13 +24,20 @@ import com.gzsll.jsbridge.WVJBWebView;
 import com.sunboxsoft.charge.institute.R;
 import com.sunboxsoft.charge.institute.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 import static android.view.KeyEvent.KEYCODE_BACK;
 
 
 public class Activity_WebJS extends BaseActivity {
 
+    @BindView(R.id.pb_web)
+    ProgressBar mPb_web;
+    @BindView(R.id.ll_root)
+    LinearLayout mLayout;
+
     private WVJBWebView mWebView;
-    private ProgressBar mPb_web;
     private boolean showTitle;
     private String mTitle;
     private TextView tv_titleName;
@@ -41,8 +49,7 @@ public class Activity_WebJS extends BaseActivity {
 
     @Override
     protected void initView() {
-        LinearLayout mLayout = (LinearLayout) findViewById(R.id.ll_root);
-        mPb_web = (ProgressBar) findViewById(R.id.pb_web);
+
         mPb_web.setVisibility(View.GONE);//网页加载进度显示与隐藏
         tv_titleName = (TextView) findViewById(R.id.tv_titleName);
 
@@ -220,5 +227,4 @@ public class Activity_WebJS extends BaseActivity {
         //LOAD_NO_CACHE: 不使用缓存，只从网络获取数据.
         //LOAD_CACHE_ELSE_NETWORK，只要本地有，无论是否过期，或者no-cache，都使用缓存中的数据。
     }
-
 }
