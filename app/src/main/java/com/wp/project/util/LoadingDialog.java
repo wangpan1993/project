@@ -35,7 +35,7 @@ public class LoadingDialog {
         if (loadingDialog == null) {
             synchronized (LoadingDialog.class) {
                 if (loadingDialog == null) {
-                    loadingDialog = new LoadingDialog(context);
+                    loadingDialog = new LoadingDialog(context.getApplicationContext());
                 }
             }
         }
