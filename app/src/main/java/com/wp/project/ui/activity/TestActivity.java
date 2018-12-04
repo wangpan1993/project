@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.wp.project.R;
 import com.wp.project.base.BaseActivity;
+import com.wp.project.base.BasePresenter;
 import com.wp.project.modle.JokeBean;
 import com.wp.project.presenter.TestPresenter;
 import com.wp.project.ui.adapter.CommonRecyclerAdapter;
@@ -32,9 +33,20 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
         return R.layout.activity_test;
     }
 
-    public void testClick(View view){
-        mPresenter.getJonke2();
+    public void testClick(View view) {
+        mPresenter.getJonke2("", new BasePresenter.CallBack<JokeBean>() {
+            @Override
+            public void onSuccess(JokeBean jokeBean) {
+
+            }
+
+            @Override
+            public void onFail() {
+
+            }
+        });
     }
+
     @Override
     protected void initView() {
         getPersimmions();

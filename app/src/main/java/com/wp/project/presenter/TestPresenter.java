@@ -2,6 +2,7 @@ package com.wp.project.presenter;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -14,9 +15,6 @@ import com.wp.project.network.HttpHold;
 import com.wp.project.network.JsonCallback;
 import com.wp.project.ui.interfaces.TestIView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class TestPresenter extends BasePresenter<TestIView> {
 
@@ -27,47 +25,24 @@ public class TestPresenter extends BasePresenter<TestIView> {
 
     public void showJoke(int page, int pagesize) {
 
-        Map<String, Object> params = getParams(new String[]{"page", "pagesize", "key"},
-                new Object[]{page, pagesize, Contants.JUHE_KEY});
-
-//        Api.getServer().jokeShow(params)
-//                .compose(schedulersTransformer())
-//                .subscribe(new HttpObserver<JokeBean>(mContext) {
-//
-//                    @Override
-//                    protected void onSuccess(JokeBean jokeBean) {
-//                        if (mView != null){
-//                            mView.onShowJoke(jokeBean);
-//                        }
-//                    }
-//
-//                    @Override
-//                    protected void onFail(Throwable e) {
-//                    }
-//                });
     }
 
-    public void getJonke() {
-//
+    public <T> void getJonke2(String key, final CallBack<T> callBack) {
         HttpParams httpParams = new HttpParams();
         httpParams.put("key", "15a8570de0fad9f681fbb6b0ca352665");
-        HttpHold.okGoPost("http://v.juhe.cn/toutiao/index", httpParams, new JsonCallback<BaseResponse<JokeBean>>() {
+        HttpHold.okGoPost("http://v.juhe.cn/toutiao/index", httpParams, new JsonCallback<ResponseBean<T>>() {
             @Override
-            public void onSuccess(Response<BaseResponse<JokeBean>> response) {
-                JokeBean result = response.body().getResult();
-                Log.d("TestPresenter", "result:" + result);
+            public void onSuccess(Response<ResponseBean<T>> response) {
+                callBack.onSuccess(response.body().result);
+
+            }
+
+            @Override
+            public void onError(Response<ResponseBean<T>> response) {
+                super.onError(response);
+                callBack.onFail();
             }
         });
     }
 
-    public void getJonke2() {
-        HttpParams httpParams = new HttpParams();
-        httpParams.put("key", "15a8570de0fad9f681fbb6b0ca352665");
-        HttpHold.okGoPost("http://v.juhe.cn/toutiao/index", httpParams, new JsonCallback<ResponseBean<JokeBean>>() {
-            @Override
-            public void onSuccess(Response<ResponseBean<JokeBean>> response) {
-                response.body().result.getData();
-            }
-        });
-    }
 }

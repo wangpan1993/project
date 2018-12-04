@@ -17,7 +17,7 @@ public class HttpHold {
     public static <T>void okGoPost(String url, HttpParams params, final JsonCallback<T> okCallBack){
         HttpParams publicParams = new HttpParams();
         publicParams.put(params);
-        OkGo.<T>post("http://v.juhe.cn/toutiao/index")
+        OkGo.<T>post(url)
                 .params(publicParams)
                 .execute(okCallBack);
 

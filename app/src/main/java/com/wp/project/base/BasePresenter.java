@@ -89,4 +89,10 @@ public class BasePresenter<T extends BaseView> {
 //            }
 //        };
 //    }
+
+    public interface CallBack<T> {
+        void onSuccess(T t);
+
+        void onFail();
+    }
 }
