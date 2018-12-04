@@ -4,22 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:text="热修复完成"-->
-        <!--android:textColor="@android:color/holo_red_dark"-->
-        <!--android:textSize="25dp" />-->
-
-    <com.wp.project.ui.view.dwrefresh.DWRefreshLayout
-        android:id="@+id/re_test"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="测试"
+        android:onClick="testClick"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="25dp" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_test"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.wp.project.ui.view.dwrefresh.DWRefreshLayout>
+    <!--<com.wp.project.ui.view.dwrefresh.DWRefreshLayout-->
+        <!--android:id="@+id/re_test"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/rv_test"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+    <!--</com.wp.project.ui.view.dwrefresh.DWRefreshLayout>-->
 </LinearLayout>

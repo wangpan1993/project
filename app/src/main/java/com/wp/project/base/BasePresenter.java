@@ -4,8 +4,6 @@ package com.wp.project.base;
 import android.content.Context;
 import android.os.Message;
 
-import com.wp.project.network.ApiException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,34 +59,34 @@ public class BasePresenter<T extends BaseView> {
         }
         return map;
     }
-
-    //统一请求响应处理：数据转化，提取data字段
-    protected <T> ObservableTransformer schedulersTransformer() {
-        return new ObservableTransformer<T, T>() {
-
-            @Override
-            public ObservableSource apply(Observable upstream) {
-                return upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).map(new Function<BaseResponse<T>, T>() {
-                    @Override
-                    public T apply(BaseResponse<T> tBaseResponse) throws Exception {
-                        if (tBaseResponse.getError_code() != 0)
-                            throw new ApiException((BaseResponse<String>) tBaseResponse);
-
-                        return tBaseResponse.getResult();
-                    }
-                }).observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
-
-    //统一请求响应处理：数据线程转化
-    protected <T> ObservableTransformer schedulersTransformer2() {
-        return new ObservableTransformer<T, T>() {
-
-            @Override
-            public ObservableSource apply(Observable upstream) {
-                return upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-            }
-        };
-    }
+//
+//    //统一请求响应处理：数据转化，提取data字段
+//    protected <T> ObservableTransformer schedulersTransformer() {
+//        return new ObservableTransformer<T, T>() {
+//
+//            @Override
+//            public ObservableSource apply(Observable upstream) {
+//                return upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).map(new Function<BaseResponse<T>, T>() {
+//                    @Override
+//                    public T apply(BaseResponse<T> tBaseResponse) throws Exception {
+//                        if (tBaseResponse.getError_code() != 0)
+//                            throw new ApiException((BaseResponse<String>) tBaseResponse);
+//
+//                        return tBaseResponse.getResult();
+//                    }
+//                }).observeOn(AndroidSchedulers.mainThread());
+//            }
+//        };
+//    }
+//
+//    //统一请求响应处理：数据线程转化
+//    protected <T> ObservableTransformer schedulersTransformer2() {
+//        return new ObservableTransformer<T, T>() {
+//
+//            @Override
+//            public ObservableSource apply(Observable upstream) {
+//                return upstream.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+//            }
+//        };
+//    }
 }

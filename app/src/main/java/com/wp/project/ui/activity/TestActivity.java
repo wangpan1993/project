@@ -21,45 +21,48 @@ import butterknife.BindView;
 public class TestActivity extends BaseActivity<TestPresenter> implements TestIView {
 
 
-    @BindView(R.id.rv_test)
-    RecyclerView rvTest;
-    @BindView(R.id.re_test)
-    DWRefreshLayout reTest;
-    private CommonRecyclerAdapter<JokeBean.DataBean> adapter;
+//    @BindView(R.id.rv_test)
+//    RecyclerView rvTest;
+//    @BindView(R.id.re_test)
+//    DWRefreshLayout reTest;
+//    private CommonRecyclerAdapter<JokeBean.DataBean> adapter;
 
     @Override
     protected int getLayout() {
         return R.layout.activity_test;
     }
 
+    public void testClick(View view){
+        mPresenter.getJonke2();
+    }
     @Override
     protected void initView() {
         getPersimmions();
-        reTest.setOnRefreshListener(new DWRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-
-            }
-        });
-        rvTest.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        adapter = new CommonRecyclerAdapter<JokeBean.DataBean>(mContext, R.layout.item_test) {
-            @Override
-            public void initAdapter(CommonViewHolder holder, View view, int position) {
-                TextView textView = holder.getView(R.id.tv_test);
-                textView.setText(getItem(position).getContent());
-            }
-        };
-        rvTest.setAdapter(adapter);
+//        reTest.setOnRefreshListener(new DWRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+//
+//            }
+//        });
+//        rvTest.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+//        adapter = new CommonRecyclerAdapter<JokeBean.DataBean>(mContext, R.layout.item_test) {
+//            @Override
+//            public void initAdapter(CommonViewHolder holder, View view, int position) {
+//                TextView textView = holder.getView(R.id.tv_test);
+//                textView.setText(getItem(position).getContent());
+//            }
+//        };
+//        rvTest.setAdapter(adapter);
     }
 
     @Override
     protected void initDatas() {
-        mPresenter.showJoke(1, 5);
+//        mPresenter.getJonke2();
     }
 
     @Override
@@ -69,7 +72,7 @@ public class TestActivity extends BaseActivity<TestPresenter> implements TestIVi
 
     @Override
     public void onShowJoke(JokeBean jokeBean) {
-        adapter.setDatas(jokeBean.getData(), true);
+//        adapter.setDatas(jokeBean.getData(), true);
     }
 
 

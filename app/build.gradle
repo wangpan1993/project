@@ -68,6 +68,7 @@ dependencies {
     compile files('src/libs/glide-full-4.4.0.jar')
     //EventBus:
     compile 'org.greenrobot:eventbus:3.1.1'
+//    compile 'com.readystatesoftware.chuck:library:1.0.4'
     compile 'com.lzy.net:okgo:3.0.4'
     //butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
